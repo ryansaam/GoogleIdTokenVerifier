@@ -132,13 +132,16 @@ func urlsafeB64decode(str string) []byte {
 }
 
 func choiceKeyByKeyID(a []keys, tknkid string) (keys, error) {
-	if len(a) == 2 {
+	if len(a) == 3 {
 		if a[0].Kid == tknkid {
 			return a[0], nil
 		}
 		if a[1].Kid == tknkid {
 			return a[1], nil
 		}
+    if a[2].Kid == tknkid {
+      return a[2], nil
+    }
 	}
 	err := errors.New("Token is not valid, kid from token and certificate don't match")
 	var b keys
